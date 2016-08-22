@@ -82,7 +82,12 @@ public class RNDeviceModule extends ReactContextBaseJavaModule {
       e.printStackTrace();
     }
 
-    constants.put("instanceId", InstanceID.getInstance(this.reactContext).getId());
+    try {
+      constants.put("instanceId", InstanceID.getInstance(this.reactContext).getId());
+    } catch (IncompatibleClassChangeError error) {
+      // do nothing
+    }
+    
     constants.put("deviceName", deviceName);
     constants.put("systemName", "Android");
     constants.put("systemVersion", Build.VERSION.RELEASE);
